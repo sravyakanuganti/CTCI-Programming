@@ -1,0 +1,10 @@
+
+public class IsUnique {
+	
+	public Boolean AreUniqueChars(String s)
+	{
+		return null;
+		
+	}
+
+}

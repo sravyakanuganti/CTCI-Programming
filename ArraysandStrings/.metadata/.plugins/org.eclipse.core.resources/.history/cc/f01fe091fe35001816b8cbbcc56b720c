@@ -1,0 +1,32 @@
+import java.util.HashSet;
+import java.util.Set;
+
+public class IsUnique {
+	
+	public boolean AreUniqueChars(String s)
+	{
+		if(s.length() > 128)
+			return false;
+		
+		Set<Character> uniqueChars = new HashSet<>();
+		
+		for(int i = 0; i < s.length(); i++)
+		{
+			if(uniqueChars.contains(s.charAt(i)))
+				return false;
+			
+			uniqueChars.add(s.charAt(i));
+				
+		}
+		
+		return true;
+		
+	}
+	
+	public static void main(String args[])
+	{
+		IsUnique unique = new IsUnique();
+		System.out.println(unique.AreUniqueChars(args[1]));
+	}
+
+}

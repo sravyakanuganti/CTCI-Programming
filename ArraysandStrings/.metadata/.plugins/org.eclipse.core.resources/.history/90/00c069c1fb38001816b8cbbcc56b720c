@@ -1,0 +1,68 @@
+import java.util.HashMap;
+import java.util.Map;
+
+/*
+ * To check if a string is permutation of the other string. For two strings to be permutation of each other,
+ * they need to satisfy below conditions:
+ * a) both the strings need to be of equal length.
+ * b) all the characters in both the strings must be the same.
+ * 
+ * Brute force: 1)Generate each possible permutation for the first string and check if it is equal to the 
+ * second string. 
+ * Time: O(n!)
+ * Space: O(n) to store each new permutation.
+ * 
+ * 2) For each character in the first string, count the number of occurrences of the character in both 
+ * strings and compare. If they are equal, continue. Else return false.
+ * Time: O(n^2) for each character, we need to traverse n characters of both strings
+ * Space: O(1)
+ * 
+ * Sorting: Sort both strings (using char arrays and convert them back to string) and compare them. 
+ * If they are equal, return true. Else, false.
+ * Time: O(n log n) for sorting.
+ * Space: O(1)
+ */
+public class CheckPermutation {
+	
+	/*
+	 * 
+	 */
+	
+	public boolean IsPermutation(String a, String b)
+	{
+		if(a.length() != b.length())
+			return false;
+		
+		int count = 0;
+		
+		Map<Character, Integer> charCount = new HashMap<>();
+		for(int i = 0; i < a.length(); i++)
+		{
+			count = charCount.getOrDefault(a.charAt(i), 0);
+			charCount.put(a.charAt(i), ++count);
+		}
+		
+		for(int i = 0; i < b.length(); i++)
+		{
+			if(!charCount.containsKey(b.charAt(i)))
+				return false;
+			
+			count = charCount.get(b.charAt(i));
+			
+			if(count <= 0)
+				return false;
+			
+			charCount.put(b.charAt(i), --count);
+		}
+		
+		return true;
+		
+	}
+	
+	public static void main(String args[])
+	{
+		CheckPermutation check = new CheckPermutation();
+		System.out.println(check.IsPermutation("ban", "banana"));
+	}
+
+}

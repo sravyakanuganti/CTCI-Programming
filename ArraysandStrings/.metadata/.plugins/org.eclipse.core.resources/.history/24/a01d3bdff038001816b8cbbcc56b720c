@@ -1,0 +1,9 @@
+
+public class CheckPermutation {
+	
+	public boolean IsPermutation(String a, String b)
+	{
+		
+	}
+
+}
