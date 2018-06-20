@@ -8,8 +8,56 @@ import java.util.Set;
 /*
  * To determine if a string has all unique characters with and without using Data Structures.
  * Here, we assume that the input is an ASCII string (128 chars).
+ * First two methods don't use any data structures and the next two methods use HashSet and BitSet 
+ * respectively.
  */
 public class IsUnique {
+	
+	/* Brute Force:
+	 * To check if the string contains all unique characters by comparing every character in the string to
+	 * all the characters that follow it till the end of the string.
+	 * 
+	 * Time: O(n^2) where n is the length of the string.
+	 * Space: O(1) since no additional space is required.
+	 */
+	public boolean AreUniqueCharsBruteForce(String s)
+	{
+		
+		if(s.length() > 128)
+			return false;
+		
+		for(int i = 0; i < s.length() - 1; i++)
+			for(int j = i + 1; j < s.length(); j++)
+				if(s.charAt(i) == s.charAt(j))
+					return false;
+		
+		return true;
+		
+	}
+	
+	/* Sorting:
+	 * To check if the string contains all unique characters by sorting the characters in the input 
+	 * character array and comparing the adjacent characters.
+	 * 
+	 * Time: O(n log n) to sort the input string.
+	 * Space: O(1)
+	 */
+	public boolean AreUniqueCharsSorting(char[] s)
+	{
+		
+		if(s.length > 128)
+			return false;
+				
+		Arrays.sort(s);
+		
+		for(int i = 0; i < s.length - 1; i++)
+			if(s[i] == s[i+1])
+				return false;
+			
+		
+		return true;
+		
+	}
 	
 	/*
 	 * To check if the string contains all unique characters using HashSet. 
@@ -41,8 +89,8 @@ public class IsUnique {
 	
 	/*
 	 * To check if the string contains all unique characters using BitSet. 
-	 * Construct a array of bits using BitSet with size 128. For each character in the string, check if the 
-	 * bit corresponding to it in the bit array is true (i.e., that character already appeared in the string)
+	 * Construct an array of bits using BitSet with size 128. For each character in the string, check if the 
+	 * bit corresponding to it in the bit array is true (i.e., that character already appeared in the astring)
 	 * if yes, return false. Else, set the bit to true and continue.
 	 * Return true once all the characters are checked.
 	 * 
@@ -67,51 +115,7 @@ public class IsUnique {
 		
 	}
 	
-	/*
-	 * To check if the string contains all unique characters by comparing every character in the string to
-	 * all the characters that follow it till the end of the string.
-	 * 
-	 * Time: O(n^2)
-	 * Space: O(1) since no additional space is required.
-	 */
-	public boolean AreUniqueCharsBruteForce(String s)
-	{
-		
-		if(s.length() > 128)
-			return false;
-		
-		for(int i = 0; i < s.length() - 1; i++)
-			for(int j = i + 1; j < s.length(); j++)
-				if(s.charAt(i) == s.charAt(j))
-					return false;
-		
-		return true;
-		
-	}
 	
-	/*
-	 * To check if the string contains all unique characters by sorting the characters in the input string
-	 * and comparing the adjacent characters.
-	 * 
-	 * Time: O(n log n) to sort the input string.
-	 * Space: O(n) to store the character array.
-	 */
-	public boolean AreUniqueCharsSorting(String s)
-	{
-		
-		if(s.length() > 128)
-			return false;
-		
-		char[] sArray = s.toCharArray();		
-		Arrays.sort(sArray);
-		
-		for(int i = 0; i < s.length() - 1; i++)
-			if(sArray[i] == sArray[i+1])
-				return false;
-		
-		return true;
-		
-	}
 	
 	
 	public static void main(String args[]) throws IOException
@@ -121,7 +125,7 @@ public class IsUnique {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		String s = reader.readLine();
 		System.out.println("Checked using BitSet: " + unique.AreUniqueCharsBitSet(s));
-		System.out.println("Checked using Sorting: " +unique.AreUniqueCharsSorting(s));
+		System.out.println("Checked using Sorting: " +unique.AreUniqueCharsSorting(s.toCharArray()));
 		System.out.println("Checked using Brute force: " +unique.AreUniqueCharsBruteForce(s));
 		System.out.println("Checked using HashSet: " +unique.AreUniqueCharsSet(s));
 	}
