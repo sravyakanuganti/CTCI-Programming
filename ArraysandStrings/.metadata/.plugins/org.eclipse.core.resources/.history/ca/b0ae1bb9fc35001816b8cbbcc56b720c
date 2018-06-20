@@ -1,8 +1,0 @@
-
-public class IsUnique {
-	
-	public boolean AreUniqueChars(String s)
-	{
-	}
-
-}
